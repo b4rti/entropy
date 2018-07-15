@@ -4,7 +4,7 @@ import (
 	"github.com/docker/go-plugins-helpers/volume"
 )
 
-// Get - return information about give volme
+// Get - return information about give volume
 func (d DDVSDriver) Get(req *volume.GetRequest) (*volume.GetResponse, error) {
 	debug(req)
 
