@@ -1,26 +1,39 @@
 
-REPO := b4rti
-NAME := ddvs
+USER := b4rti
+REPO := ddvs
 TAG := latest
 
-IMAGE := $(REPO)/$(NAME):$(TAG)
+IMAGE := $(USER)/$(REPO):$(TAG)
 
-all:
-	make image rootfs plugin
+all: clean image rootfs plugin
 
-image:
+.PHONY: clean
+clean:
+	rm -rf ./plugin
+
+.PHONY: image
+image: clean
 	docker build --rm -f Dockerfile -t $(IMAGE) .
 
-rootfs:
+.PHONY: rootfs
+rootfs: image
 	mkdir -p ./plugin/rootfs
 	$(eval ID = $(shell docker create b4rti/ddvs true))
 	docker export $(ID) | tar -x -C ./plugin/rootfs
 	docker rm $(ID) && docker rmi --force $(IMAGE)
 
-plugin:
+.PHONY: plugin
+plugin: rootfs
 	cp ./config.json ./plugin
 	(docker plugin remove --force $(IMAGE) || true)
 	docker plugin create $(IMAGE) ./plugin
-	docker plugin enable $(IMAGE)
 	rm -rf ./plugin
 
+.PHONY: enable
+enable: plugin
+	docker plugin enable $(IMAGE)
+
+.PHONY: push
+push: plugin
+	docker login -u $(USER)
+	docker plugin push $(IMAGE)
