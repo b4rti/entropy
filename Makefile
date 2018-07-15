@@ -6,10 +6,7 @@ TAG := latest
 IMAGE := $(REPO)/$(NAME):$(TAG)
 
 all:
-	make clean image rootfs plugin
-
-clean:
-	rm -rf ./plugin
+	make image rootfs plugin
 
 image:
 	docker build --rm -f Dockerfile -t $(IMAGE) .
@@ -25,4 +22,5 @@ plugin:
 	(docker plugin remove --force $(IMAGE) || true)
 	docker plugin create $(IMAGE) ./plugin
 	docker plugin enable $(IMAGE)
+	rm -rf ./plugin
 
