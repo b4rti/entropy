@@ -2,7 +2,7 @@ package main
 
 import "github.com/docker/go-plugins-helpers/volume"
 
-// Capabilities returns Driver Capabilities - global
+// Capabilities - returns Driver Capabilities - global
 func (d DDVSDriver) Capabilities() *volume.CapabilitiesResponse {
 	caps := volume.Capability{
 		Scope: "global",
