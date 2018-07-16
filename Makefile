@@ -1,6 +1,6 @@
 
 USER := b4rti
-REPO := ddvs
+REPO := entropy
 TAG := latest
 
 IMAGE := $(USER)/$(REPO):$(TAG)
@@ -16,7 +16,7 @@ clean:
 
 .PHONY: image
 image: clean
-	docker build --rm -f Dockerfile -t $(IMAGE) .
+	docker build --rm -t $(IMAGE) .
 
 .PHONY: rootfs
 rootfs: image
