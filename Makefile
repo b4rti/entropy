@@ -21,7 +21,7 @@ image: clean
 .PHONY: rootfs
 rootfs: image
 	mkdir -p $(ROOTFS)
-	$(eval ID = $(shell docker create b4rti/ddvs true))
+	$(eval ID = $(shell docker create b4rti/entropy true))
 	docker export $(ID) | tar -x -C $(ROOTFS)
 	docker rm $(ID) && docker rmi --force $(IMAGE)
 
