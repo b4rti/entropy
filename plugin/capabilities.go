@@ -1,9 +1,9 @@
-package main
+package entropy
 
 import "github.com/docker/go-plugins-helpers/volume"
 
 // Capabilities - returns Driver Capabilities - global
-func (d DDVSDriver) Capabilities() *volume.CapabilitiesResponse {
+func (d Driver) Capabilities() *volume.CapabilitiesResponse {
 	caps := volume.Capability{
 		Scope: "global",
 	}

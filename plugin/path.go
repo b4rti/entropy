@@ -1,11 +1,11 @@
-package main
+package entropy
 
 import (
 	"github.com/docker/go-plugins-helpers/volume"
 )
 
 // Path - returns the mountpoint
-func (d DDVSDriver) Path(req *volume.PathRequest) (*volume.PathResponse, error) {
+func (d Driver) Path(req *volume.PathRequest) (*volume.PathResponse, error) {
 	debug(req)
 
 	res := &volume.PathResponse{

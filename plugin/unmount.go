@@ -1,11 +1,11 @@
-package main
+package entropy
 
 import (
 	"github.com/docker/go-plugins-helpers/volume"
 )
 
 // Unmount - unmounts thew give volume
-func (d DDVSDriver) Unmount(req *volume.UnmountRequest) error {
+func (d Driver) Unmount(req *volume.UnmountRequest) error {
 	debug(req)
 
 	return nil
