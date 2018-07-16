@@ -5,11 +5,14 @@ TAG := latest
 
 IMAGE := $(USER)/$(REPO):$(TAG)
 
+BUILD := ./build
+ROOTFS := $(BUILD)/rootfs
+
 all: clean image rootfs plugin
 
 .PHONY: clean
 clean:
-	rm -rf ./plugin
+	rm -rf $(BUILD)
 
 .PHONY: image
 image: clean
@@ -17,17 +20,17 @@ image: clean
 
 .PHONY: rootfs
 rootfs: image
-	mkdir -p ./plugin/rootfs
+	mkdir -p $(ROOTFS)
 	$(eval ID = $(shell docker create b4rti/ddvs true))
-	docker export $(ID) | tar -x -C ./plugin/rootfs
+	docker export $(ID) | tar -x -C $(ROOTFS)
 	docker rm $(ID) && docker rmi --force $(IMAGE)
 
 .PHONY: plugin
 plugin: rootfs
-	cp ./config.json ./plugin
+	cp ./config.json $(BUILD)
 	(docker plugin remove --force $(IMAGE) || true)
-	docker plugin create $(IMAGE) ./plugin
-	rm -rf ./plugin
+	docker plugin create $(IMAGE) $(BUILD)
+	rm -rf $(BUILD)
 
 .PHONY: enable
 enable: plugin

@@ -1,6 +1,6 @@
 FROM golang
 
-WORKDIR /go/src/app
+WORKDIR /go/src/github.com/b4rti/ddvs/
 COPY . .
 
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /ddvs .
