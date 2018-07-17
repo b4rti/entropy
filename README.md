@@ -1,8 +1,7 @@
 
 ## Distributed Docker Volume System
 
-
-[![Go Report Card](https://goreportcard.com/report/github.com/b4rti/entropy)](https://goreportcard.com/report/github.com/b4rti/entropy) ![Project Status](https://img.shields.io/badge/status-alpha-red.svg) 
+[![Go Report Card](https://goreportcard.com/badge/github.com/b4rti/entropy)](https://goreportcard.com/report/github.com/b4rti/entropy) ![Project Status](https://img.shields.io/badge/status-alpha-red.svg) 
 
 Entropy is a scalable Network Filesystem Plugin for Docker Swarm.  It allows  to combine Disk Space on many Swarm Nodes into a single name space. 
 
