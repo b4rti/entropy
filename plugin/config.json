@@ -19,6 +19,22 @@
         "source": "/run/docker.sock",
         "settable": ["source"],
         "type": "bind"
+      },
+      {
+        "destination": "/var/lib/docker/plugins/entropy",
+        "options": ["rbind"],
+        "name": "state",
+        "source": "/var/lib/docker/plugins/entropy",
+        "settable": ["source"],
+        "type": "bind"
+      },
+      {
+        "destination": "/etc/entropy",
+        "options": ["rbind"],
+        "name": "state",
+        "source": "/etc/entropy",
+        "settable": ["source"],
+        "type": "bind"
       }
     ],
     "network": {
