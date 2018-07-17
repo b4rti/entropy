@@ -7,6 +7,7 @@ IMAGE := $(USER)/$(REPO):$(TAG)
 
 BUILD := ./build
 ROOTFS := $(BUILD)/rootfs
+CONFIG := ./plugin/config.json
 
 all: clean image rootfs plugin
 
@@ -27,7 +28,7 @@ rootfs: image
 
 .PHONY: plugin
 plugin: rootfs
-	cp ./config.json $(BUILD)
+	cp $(CONFIG) $(BUILD)
 	(docker plugin remove --force $(IMAGE) || true)
 	docker plugin create $(IMAGE) $(BUILD)
 	rm -rf $(BUILD)
@@ -40,3 +41,9 @@ enable: plugin
 push: plugin
 	docker login -u $(USER)
 	docker plugin push $(IMAGE)
+
+.PHONY: run
+run: clean
+	go build -o $(BUILD)/entropy
+	sudo $(BUILD)/entropy
+	rm -rf $(BUILD)
