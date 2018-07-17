@@ -10,3 +10,6 @@
 [submodule "vendor/github.com/docker/docker"]
 	path = vendor/github.com/docker/docker
 	url = https://github.com/docker/docker
+[submodule "vendor/gopkg.in/yaml.v2"]
+	path = vendor/gopkg.in/yaml.v2
+	url = https://gopkg.in/yaml.v2
