@@ -1,0 +1,28 @@
+baseURL = "https://b4rti.github.io/entropy"
+languageCode = "en-us"
+title = "Entropy Docs"
+theme = "hugo-theme-learn"
+publishDir = "docs"
+
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
+
+
+[params]
+editURL = ""
+author = "Entropy"
+description = ""
+showVisitedLinks = true
+disableSearch = true
+disableAssetsBusting = false
+disableInlineCopyToClipBoard = false
+disableShortcutsTitle = false
+disableLanguageSwitchingButton = false
+ordersectionsby = "weight"
+themeVariant = "blue"
+
+[[menu.shortcuts]] 
+name = "<i class='fa fa-github'></i> Github repo"
+identifier = "ds"
+url = "https://github.com/b4rti/entropy"
+weight = 10

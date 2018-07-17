@@ -7,7 +7,8 @@ import (
 )
 
 func main() {
-	go entropy.NewEntropyPlugin().Serve()
+	go eplugin.NewEntropyPlugin().Serve()
 
 	fmt.Scanln()
+
 }
