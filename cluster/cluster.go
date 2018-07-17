@@ -3,7 +3,6 @@ package ecluster
 import (
 	"context"
 	"encoding/json"
-	"io"
 	"log"
 	"net"
 	"net/http"
@@ -12,27 +11,27 @@ import (
 	"github.com/docker/docker/api/types/swarm"
 )
 
+// GetInfo - GetInfo return a *json.Decoder attached to net.Response.Body of a Info Request
 func GetInfo() *types.Info {
 
-	b := doRequest("http://info")
-	d := json.NewDecoder(b)
-	dsi := &types.Info{}
-	d.Decode(dsi)
+	d := doRequest("http://info")
+	i := &types.Info{}
+	d.Decode(i)
 
-	return dsi
+	return i
 }
 
+// GetNodes - GetNodes return a *json.Decoder attached to net.Response.Body of a Nodes Request
 func GetNodes() *[]swarm.Node {
 
-	b := doRequest("http://nodes")
-	d := json.NewDecoder(b)
-	nl := &[]swarm.Node{}
-	d.Decode(nl)
+	d := doRequest("http://swarm/nodes")
+	n := &[]swarm.Node{}
+	d.Decode(n)
 
-	return nl
+	return n
 }
 
-func doRequest(path string) io.ReadCloser {
+func doRequest(path string) *json.Decoder {
 	c := http.Client{
 		Transport: &http.Transport{
 			DialContext: func(_ context.Context, _, _ string) (net.Conn, error) {
@@ -46,5 +45,5 @@ func doRequest(path string) io.ReadCloser {
 		log.Fatal(err.Error())
 	}
 
-	return res.Body
+	return json.NewDecoder(res.Body)
 }
