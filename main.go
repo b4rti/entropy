@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/b4rti/ddvs/plugin"
+	"github.com/b4rti/entropy/plugin"
 )
 
 func main() {

@@ -2,7 +2,7 @@ package entropy
 
 import "github.com/docker/go-plugins-helpers/volume"
 
-// DDVSDriver - driver struct
+// Driver - driver struct
 type Driver struct {
 	volume.Driver
 }

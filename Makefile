@@ -1,6 +1,6 @@
 
 USER := b4rti
-REPO := ddvs
+REPO := entropy
 TAG := latest
 
 IMAGE := $(USER)/$(REPO):$(TAG)
@@ -16,12 +16,12 @@ clean:
 
 .PHONY: image
 image: clean
-	docker build --rm -f Dockerfile -t $(IMAGE) .
+	docker build --rm -t $(IMAGE) .
 
 .PHONY: rootfs
 rootfs: image
 	mkdir -p $(ROOTFS)
-	$(eval ID = $(shell docker create b4rti/ddvs true))
+	$(eval ID = $(shell docker create b4rti/entropy true))
 	docker export $(ID) | tar -x -C $(ROOTFS)
 	docker rm $(ID) && docker rmi --force $(IMAGE)
 

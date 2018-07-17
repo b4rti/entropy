@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	// DDSVPath - WTF golint
+	// EntropyPath - path to workdir
 	EntropyPath = "/var/lib/ddsv"
 )
 

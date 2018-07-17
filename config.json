@@ -1,9 +1,9 @@
 {
-    "description": "Distributed Docker Volume System",
-    "documentation": "https://github.com/b4rti/ddvs",
-    "entrypoint": ["/bin/ddvs"],
+    "description": "Entropy Distributed Docker Volume System",
+    "documentation": "https://github.com/b4rti/entropy/docs",
+    "entrypoint": ["/bin/entropy"],
     "interface": {
-      "socket": "ddvs.sock",
+      "socket": "entropy.sock",
       "types": ["docker.volumedriver/1.0"]
     },
     "linux": {
