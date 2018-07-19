@@ -3,7 +3,7 @@ FROM golang
 WORKDIR /go/src/github.com/b4rti/entropy/
 COPY . .
 
-RUN go build -a -o /entropy .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /entropy .
 
 ######################################################################
 
