@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/b4rti/entropy/cluster"
@@ -18,11 +19,16 @@ func main() {
 		c = LoadConfig()
 	}
 
+	ecluster.GetInfo()
+	ecluster.GetNodes()
+
 	if !ecluster.CheckNetwork(c.NetworkName) {
-		ecluster.CreateNetwork(c.NetworkName)
+		id, err := ecluster.CreateNetwork(c.NetworkName)
+		if err != nil {
+			log.Fatalln(err.Error())
+		}
+		fmt.Println(id)
 	}
 
-	go eplugin.NewEntropyPlugin().Serve()
-
-	fmt.Scanln()
+	eplugin.NewEntropyPlugin().Serve()
 }

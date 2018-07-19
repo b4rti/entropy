@@ -21,10 +21,10 @@
         "type": "bind"
       },
       {
-        "destination": "/var/lib/docker/plugins/entropy",
+        "destination": "/var/lib/docker/plugins",
         "options": ["rbind"],
         "name": "state",
-        "source": "/var/lib/docker/plugins/entropy",
+        "source": "/var/lib/docker/plugins",
         "settable": ["source"],
         "type": "bind"
       },
@@ -38,6 +38,6 @@
       }
     ],
     "network": {
-      "type": "host"
+      "type": "bridge"
     }
   }

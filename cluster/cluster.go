@@ -1,9 +1,9 @@
 package ecluster
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
-	"log"
 	"net"
 	"net/http"
 
@@ -12,26 +12,34 @@ import (
 )
 
 // GetInfo - GetInfo return a *json.Decoder attached to net.Response.Body of a Info Request
-func GetInfo() *types.Info {
+func GetInfo() (*types.Info, error) {
 
-	d := doRequest("http://info")
+	d, err := doGETDocker("http://swarm/info")
+	if err != nil {
+		return nil, err
+	}
+
 	i := &types.Info{}
 	d.Decode(i)
 
-	return i
+	return i, err
 }
 
 // GetNodes - GetNodes return a *json.Decoder attached to net.Response.Body of a Nodes Request
-func GetNodes() *[]swarm.Node {
+func GetNodes() (*[]swarm.Node, error) {
 
-	d := doRequest("http://swarm/nodes")
+	d, err := doGETDocker("http://swarm/nodes")
+	if err != nil {
+		return nil, err
+	}
+
 	n := &[]swarm.Node{}
 	d.Decode(n)
 
-	return n
+	return n, err
 }
 
-func doRequest(path string) *json.Decoder {
+func doGETDocker(p string) (*json.Decoder, error) {
 	c := http.Client{
 		Transport: &http.Transport{
 			DialContext: func(_ context.Context, _, _ string) (net.Conn, error) {
@@ -40,10 +48,28 @@ func doRequest(path string) *json.Decoder {
 		},
 	}
 
-	res, err := c.Get(path)
+	res, err := c.Get(p)
 	if err != nil {
-		log.Fatal(err.Error())
+		return nil, err
 	}
 
-	return json.NewDecoder(res.Body)
+	return json.NewDecoder(res.Body), err
+}
+
+func doPOSTDocker(p string, d []byte) (*json.Decoder, error) {
+	c := http.Client{
+		Transport: &http.Transport{
+			DialContext: func(_ context.Context, _, _ string) (net.Conn, error) {
+				return net.Dial("unix", "/run/docker.sock")
+			},
+		},
+	}
+
+	b := bytes.NewBuffer(d)
+	res, err := c.Post(p, "application/json", b)
+	if err != nil {
+		return nil, err
+	}
+
+	return json.NewDecoder(res.Body), err
 }
