@@ -46,6 +46,6 @@ push: plugin
 run: image
 	docker run --rm -ti \
 		-v /run/docker.sock:/run/docker.sock \
-		-v /var/lib/docker/plugins:/var/lib/docker/plugins \
+		-v /var/lib/entropy:/var/lib/entropy \
 		-v /etc/entropy:/etc/entropy \
 		$(IMAGE)

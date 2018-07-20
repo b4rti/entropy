@@ -1,43 +1,59 @@
 {
     "description": "Entropy Distributed Docker Volume System",
     "documentation": "https://github.com/b4rti/entropy/docs",
-    "entrypoint": ["/bin/entropy"],
+    "entrypoint": [
+        "/bin/entropy"
+    ],
     "interface": {
-      "socket": "entropy.sock",
-      "types": ["docker.volumedriver/1.0"]
+        "socket": "entropy.sock",
+        "types": [
+            "docker.volumedriver/1.0"
+        ]
     },
     "linux": {
-      "capabilities": [
-          "CAP_SYS_ADMIN"
+        "capabilities": [
+            "CAP_SYS_ADMIN"
         ]
     },
     "mounts": [
-      {
-        "destination": "/run/docker.sock",
-        "options": ["rbind"],
-        "name": "state",
-        "source": "/run/docker.sock",
-        "settable": ["source"],
-        "type": "bind"
-      },
-      {
-        "destination": "/var/lib/docker/plugins",
-        "options": ["rbind"],
-        "name": "state",
-        "source": "/var/lib/docker/plugins",
-        "settable": ["source"],
-        "type": "bind"
-      },
-      {
-        "destination": "/etc/entropy",
-        "options": ["rbind"],
-        "name": "state",
-        "source": "/etc/entropy",
-        "settable": ["source"],
-        "type": "bind"
-      }
+        {
+            "destination": "/etc/entropy",
+            "options": [
+                "rbind"
+            ],
+            "name": "state",
+            "source": "/etc/entropy",
+            "settable": [
+                "source"
+            ],
+            "type": "bind"
+        },
+        {
+            "destination": "/var/lib/entropy",
+            "options": [
+                "rbind"
+            ],
+            "name": "state",
+            "source": "/var/lib/entropy",
+            "settable": [
+                "source"
+            ],
+            "type": "bind"
+        },
+        {
+            "destination": "/run/docker.sock",
+            "options": [
+                "rbind"
+            ],
+            "name": "state",
+            "source": "/run/docker.sock",
+            "settable": [
+                "source"
+            ],
+            "type": "bind"
+        }
     ],
     "network": {
-      "type": "bridge"
+        "type": "host"
     }
-  }
+}
