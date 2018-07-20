@@ -43,7 +43,9 @@ push: plugin
 	docker plugin push $(IMAGE)
 
 .PHONY: run
-run: clean
-	go build -o $(BUILD)/entropy
-	sudo $(BUILD)/entropy
-	rm -rf $(BUILD)
+run: image
+	docker run --rm -ti \
+		-v /run/docker.sock:/run/docker.sock \
+		-v /var/lib/entropy:/var/lib/entropy \
+		-v /etc/entropy:/etc/entropy \
+		$(IMAGE)
