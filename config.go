@@ -7,7 +7,7 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-// Config - set by YAML
+// Config - Set by YAML
 type Config struct {
 	WorkDir          string `yaml:"WorkDir"`
 	NetworkName      string `yaml:"NetworkName"`
@@ -16,7 +16,7 @@ type Config struct {
 	NetworkEncrypted bool   `yaml:"NetworkEncrypted"`
 }
 
-// CreateDefaultConfig - creat default struct
+// CreateDefaultConfig - Creat default struct
 func CreateDefaultConfig(p string) *Config {
 	c := Config{
 		WorkDir:          "/var/lib/entropy",
@@ -36,7 +36,7 @@ func CreateDefaultConfig(p string) *Config {
 	return &c
 }
 
-// LoadConfig - config struct
+// LoadConfig - Config load struct
 func LoadConfig(p string) *Config {
 	d, err := ioutil.ReadFile(p)
 	if err != nil {
