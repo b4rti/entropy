@@ -54,9 +54,6 @@ func listNetworks() (*[]types.NetworkResource, error) {
 	n := &[]types.NetworkResource{}
 
 	err = d.Decode(n)
-	if err != nil {
-		return nil, err
-	}
 
 	return n, err
 }

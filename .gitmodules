@@ -13,3 +13,12 @@
 [submodule "vendor/gopkg.in/yaml.v2"]
 	path = vendor/gopkg.in/yaml.v2
 	url = https://gopkg.in/yaml.v2
+[submodule "vendor/github.com/b4rti/go-fuse"]
+	path = vendor/github.com/b4rti/go-fuse
+	url = https://github.com/b4rti/go-fuse
+[submodule "vendor/github.com/ulikunitz/xz"]
+	path = vendor/github.com/ulikunitz/xz
+	url = https://github.com/ulikunitz/xz
+[submodule "vendor/golang.org/x/sys"]
+	path = vendor/golang.org/x/sys
+	url = https://golang.org/x/sys

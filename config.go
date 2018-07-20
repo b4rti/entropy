@@ -8,16 +8,20 @@ import (
 )
 
 type Config struct {
-	WorkdirPath string
-	PluginPath  string
-	NetworkName string
+	WorkDir          string `yaml:"WorkDir"`
+	NetworkName      string `yaml:"NetworkName"`
+	NetworkDriver    string `yaml:"NetworkDriver"`
+	NetworkRange     string `yaml:"NetworkRange"`
+	NetworkEncrypted bool   `yaml:"NetworkEncrypted"`
 }
 
-func CreateDefaultConfig() *Config {
+func CreateDefaultConfig(p string) *Config {
 	c := Config{
-		WorkdirPath: "/var/lib/entropy",
-		PluginPath:  "/var/lib/docker/plugins/entropy",
-		NetworkName: "entropy",
+		WorkDir:          "/var/lib/entropy",
+		NetworkName:      "entropy",
+		NetworkDriver:    "overlay",
+		NetworkRange:     "10.255.0.0/16",
+		NetworkEncrypted: true,
 	}
 
 	d, err := yaml.Marshal(c)
@@ -25,13 +29,13 @@ func CreateDefaultConfig() *Config {
 		log.Fatal(err.Error())
 	}
 
-	ioutil.WriteFile("/etc/entropy/config.yml", d, 0644)
+	ioutil.WriteFile(p, d, 0644)
 
 	return &c
 }
 
-func LoadConfig() *Config {
-	d, err := ioutil.ReadFile("/etc/entropy/config.yml")
+func LoadConfig(p string) *Config {
+	d, err := ioutil.ReadFile(p)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
