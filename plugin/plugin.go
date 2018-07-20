@@ -15,10 +15,12 @@ const (
 	EntropyPath = "/var/lib/ddsv"
 )
 
+// EntropyPlugin - plugin struct
 type EntropyPlugin struct {
 	handler *volume.Handler
 }
 
+// NewEntropyPlugin - plugin struct
 func NewEntropyPlugin() *EntropyPlugin {
 	d := Driver{}
 	h := volume.NewHandler(d)
@@ -28,6 +30,7 @@ func NewEntropyPlugin() *EntropyPlugin {
 	}
 }
 
+// e *EntropyPlugin - plugin struct
 func (e *EntropyPlugin) Serve() {
 	u, err := user.Lookup("root")
 	if err != nil {
