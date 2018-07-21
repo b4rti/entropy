@@ -6,6 +6,7 @@ import (
 	"github.com/docker/docker/api/types"
 )
 
+// CheckNetwork - list network
 func CheckNetwork(s string) bool {
 
 	nl, err := listNetworks()
@@ -22,6 +23,7 @@ func CheckNetwork(s string) bool {
 	return false
 }
 
+// CreateNetwork - network create
 func CreateNetwork(s string) (string, error) {
 
 	n := map[string]interface{}{

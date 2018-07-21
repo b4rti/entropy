@@ -4,11 +4,9 @@ import (
 	"log"
 	"os"
 	"path"
-
-	"github.com/b4rti/entropy/cluster"
-	"github.com/b4rti/entropy/plugin"
 )
 
+// ConfigPath - Path to YAML config
 const ConfigPath = "/etc/entropy/config.yml"
 
 func main() {
