@@ -20,7 +20,7 @@ type EntropyPlugin struct {
 	handler *volume.Handler
 }
 
-// NewEntropyPlugin - plugin struct
+// NewEntropyPlugin - return new Plugin
 func NewEntropyPlugin() *EntropyPlugin {
 	d := Driver{}
 	h := volume.NewHandler(d)
@@ -30,7 +30,7 @@ func NewEntropyPlugin() *EntropyPlugin {
 	}
 }
 
-// e *EntropyPlugin - plugin struct
+// e *Serve - serves unix socket
 func (e *EntropyPlugin) Serve() {
 	u, err := user.Lookup("root")
 	if err != nil {
