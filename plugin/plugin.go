@@ -30,7 +30,7 @@ func NewEntropyPlugin() *EntropyPlugin {
 	}
 }
 
-// e *Serve - serves unix socket
+// Serve - serves unix socket
 func (e *EntropyPlugin) Serve() {
 	u, err := user.Lookup("root")
 	if err != nil {
