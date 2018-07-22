@@ -40,6 +40,9 @@ func CreateNetwork(s string) (string, error) {
 	}
 
 	d, err := doPOSTDocker("http://swarm/networks/create", b)
+	if err != nil {
+		return "", err
+	}
 
 	res := &struct {
 		Id string
@@ -52,6 +55,9 @@ func CreateNetwork(s string) (string, error) {
 
 func listNetworks() (*[]types.NetworkResource, error) {
 	d, err := doGETDocker("http://swarm/networks")
+	if err != nil {
+		return nil, err
+	}
 
 	n := &[]types.NetworkResource{}
 
