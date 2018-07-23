@@ -9,6 +9,10 @@ BUILD := ./build
 ROOTFS := $(BUILD)/rootfs
 CONFIG := ./plugin/config.json
 
+TEST_MANAGER := 3
+TEST_WORKER := 9
+TEST_DRIVER := virtualbox
+
 all: clean image rootfs plugin
 
 .PHONY: clean
@@ -49,3 +53,20 @@ run: image
 		-v /var/lib/entropy:/var/lib/entropy \
 		-v /etc/entropy:/etc/entropy \
 		$(IMAGE)
+
+.PHONY: test
+test:# push
+	n=$(TEST_MANAGER); \
+	while [ $${n} -gt 0 ] ; do \
+		((docker-machine rm -y manager$$n) || true) \
+		&& docker-machine create -d $(TEST_DRIVER) manager$$n \
+		&& ((n = n - 1) || true) \
+	done;
+	$(eval $(shell docker-machine env manager1 \
+		&& docker swarm init \
+		&& TOKEN_MANAGER="$(docker swarm join-token -q manager)" \
+		&& TOKEN_WORKER="$(docker swarm join-token -q worker)" \
+	))
+	
+	echo $(TOKEN_MANAGER)
+	echo $(TOKEN_WORKER)
