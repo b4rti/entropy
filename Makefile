@@ -56,17 +56,4 @@ run: image
 
 .PHONY: test
 test:# push
-	n=$(TEST_MANAGER); \
-	while [ $${n} -gt 0 ] ; do \
-		((docker-machine rm -y manager$$n) || true) \
-		&& docker-machine create -d $(TEST_DRIVER) manager$$n \
-		&& ((n = n - 1) || true) \
-	done;
-	$(eval $(shell docker-machine env manager1 \
-		&& docker swarm init \
-		&& TOKEN_MANAGER="$(docker swarm join-token -q manager)" \
-		&& TOKEN_WORKER="$(docker swarm join-token -q worker)" \
-	))
-	
-	echo $(TOKEN_MANAGER)
-	echo $(TOKEN_WORKER)
+
