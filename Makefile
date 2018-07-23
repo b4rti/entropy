@@ -9,6 +9,10 @@ BUILD := ./build
 ROOTFS := $(BUILD)/rootfs
 CONFIG := ./plugin/config.json
 
+TEST_MANAGER := 3
+TEST_WORKER := 9
+TEST_DRIVER := virtualbox
+
 all: clean image rootfs plugin
 
 .PHONY: clean
@@ -49,3 +53,7 @@ run: image
 		-v /var/lib/entropy:/var/lib/entropy \
 		-v /etc/entropy:/etc/entropy \
 		$(IMAGE)
+
+.PHONY: test
+test:# push
+
