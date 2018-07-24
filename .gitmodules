@@ -22,3 +22,6 @@
 [submodule "vendor/golang.org/x/sys"]
 	path = vendor/golang.org/x/sys
 	url = https://golang.org/x/sys
+[submodule "vendor/github.com/b4rti/afero"]
+	path = vendor/github.com/b4rti/afero
+	url = https://github.com/b4rti/afero
