@@ -15,10 +15,10 @@ Docker has exelent Drivers, but none for Volumes. The user cannot simply use/reu
 ## Install & Run Entropy Plugin
 
 ```
-$ docker plugin install b4rti/Entropy
+$ docker plugin install b4rti/entropy
 ```
 ```
-$ docker volume create -d b4rti/Entropy --name volume-name
+$ docker volume create -d b4rti/entropy --name volume-name
 ```
 ```
 $ docker run -v volume-name:/mnt --rm -ti ubuntu
